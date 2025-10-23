@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyPDEVS"
+version = "2.4.1"
+description = "Python Parallel DEVS simulator"
+authors = [
+    {name = "Yentl Van Tendeloo", email = "Yentl.VanTendeloo@uantwerpen.be"}
+]
+readme = "README.md"
+requires-python = ">=3.6"
+license = {file = "LICENSE"}
+
+[project.urls]
+Homepage = "http://msdl.cs.mcgill.ca/people/yentl"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pypdevs*"]
