@@ -548,8 +548,8 @@ class Controller(BaseSimulator):
         self.realtime = True
         self.threading_backend = ThreadingBackend(subsystem, args)
         self.rt_zerotime = time.time()
-        async = AsynchronousComboGenerator(generator_file, self.threading_backend)
-        self.asynchronous_generator = async
+        _async = AsynchronousComboGenerator(generator_file, self.threading_backend)
+        self.asynchronous_generator = _async
         self.realtime_starttime = time.time()
         self.portmap = ports
         self.model.listeners = listeners
