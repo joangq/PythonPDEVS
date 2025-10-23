@@ -750,13 +750,17 @@ class RootDEVS(BaseDEVS):
         :param scheduler_type: type of scheduler to use (string representation)
         """
         if isinstance(scheduler_type, tuple):
+            # Import the scheduler class and make it available in the local namespace
+            scheduler_globals = {}
             try:
-                exec("from pypdevs.schedulers.%s import %s" % scheduler_type)
+                exec("from pypdevs.schedulers.%s import %s" % scheduler_type, scheduler_globals)
             except:
-                exec("from %s import %s" % scheduler_type)
+                exec("from %s import %s" % scheduler_type, scheduler_globals)
+            
+            # Get the scheduler class from the imported globals
+            scheduler_class = scheduler_globals[scheduler_type[1]]
             nr_models = len(self.models)
-            self.scheduler = eval("%s(self.component_set, EPSILON, nr_models)"
-                                  % scheduler_type[1])
+            self.scheduler = scheduler_class(self.component_set, EPSILON, nr_models)
         else:
             raise DEVSException("Unknown Scheduler: " + str(scheduler_type))
 
